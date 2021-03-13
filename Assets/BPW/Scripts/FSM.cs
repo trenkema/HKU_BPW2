@@ -41,6 +41,7 @@ public class FSM : MonoBehaviour
 
     // References
     public Animator gameOverAnimator;
+    public Animator winAnimator;
 
     private void Awake()
     {
@@ -154,12 +155,15 @@ public class FSM : MonoBehaviour
 
     public void GameWinState()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         state = StateEnum.GameWin;
         PlayerPrefs.SetString("GameFlow", state.ToString());
         playerMovement.enabled = false;
         playerLook.enabled = false;
         playerManager.enabled = false;
         gameWinPanel.SetActive(true);
+        winAnimator.SetBool("GameWin", true);
     }
 
     // Resume a Saved Game

@@ -167,7 +167,7 @@ public class BossSpawner : MonoBehaviour
     {
         bossDefeated = true;
         colliderCheck.enemiesDefeated = true;
-        Instantiate(NextLevelPortal, transform.position, Quaternion.identity);
+        Instantiate(NextLevelPortal, new Vector3(transform.position.x, 0.015f, transform.position.z), Quaternion.identity);
         if (GameManager.Instance.activeQuest != null && GameManager.Instance.activeQuest.isActive)
         {
             GameManager.Instance.activeQuest.goal.EventHappened(bossEventID);

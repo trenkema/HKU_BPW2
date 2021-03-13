@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerObject;
     public InventoryObject inventory;
     public Hand hand;
+    public int activeSlot;
     public List<KeyCode> keyCodesInventory = new List<KeyCode>();
     public List<ItemType> inventorySlotTypes = new List<ItemType>();
     public float inventoryCooldown = 1f;

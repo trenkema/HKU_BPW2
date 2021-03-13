@@ -15,6 +15,7 @@ public class Hand : MonoBehaviour
     private void Start()
     {
         activeSlot = 0;
+        GameManager.Instance.activeSlot = activeSlot;
         inventory.onAddItem += AddItem;
         inventory.onRemoveItem += RemoveItem;
         inventory.onLoadStart += ResetInventory;
@@ -120,6 +121,7 @@ public class Hand : MonoBehaviour
         }
 
         activeSlot = slotID;
+        GameManager.Instance.activeSlot = slotID; ;
         inventory.container.Items[slotID].isActive = true;
         spawnedObjects[slotID].SetActive(true);
     }

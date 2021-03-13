@@ -49,7 +49,7 @@ public class InventoryObject : ScriptableObject
         // If Item Instantiates on Switch, Switch Item With ActiveSlot
         for (int i = 0; i < container.Items.Length; i++)
         {
-            if (container.Items[i].hasItem && i == GameManager.Instance.hand.activeSlot && container.Items[i].type == _type && _item.instantiatable)
+            if (container.Items[i].hasItem && i == GameManager.Instance.activeSlot && container.Items[i].type == _type && _item.instantiatable)
             {
                 SwitchItem(container.Items[i], _item);
                 onSwitchItem?.Invoke(_item);
