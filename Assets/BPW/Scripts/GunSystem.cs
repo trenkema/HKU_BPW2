@@ -107,18 +107,10 @@ public class GunSystem : MonoBehaviour
 
         if (Physics.Raycast(mainCamera.transform.position, direction, out rayHit, range, whatIsEnememy))
         {
-            if (rayHit.collider.GetComponent<EnemyAI>() != null)
-            {
-                rayHit.collider.GetComponent<EnemyAI>().TakeDamage(damage);
-            }
-
-            if (rayHit.collider.GetComponent<Destructible>() != null)
-            {
-                rayHit.collider.GetComponent<Destructible>().TakeDamage(damage);
-            }
+            rayHit.collider.GetComponent<IDamageable>()?.TakeDamage(damage);
         }
 
-        if (Physics.Raycast(mainCamera.transform.position, direction, out rayHit, range, bulletHoleLayer))
+        if (Physics.Raycast(mainCamera.transform.position, direction, out rayHit, range, bulletHoleLayer, QueryTriggerInteraction.Ignore))
         {
             GameObject bulletHole = Instantiate(bulletHoleGraphic, rayHit.point + rayHit.normal * 0.001f, Quaternion.FromToRotation(Vector3.up, rayHit.normal));
             Destroy(bulletHole, 2f);

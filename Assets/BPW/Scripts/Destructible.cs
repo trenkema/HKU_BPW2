@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destructible : MonoBehaviour
+public class Destructible : MonoBehaviour, IDamageable
 {
     public float health;
     public GameObject[] itemDrop;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int _damage)
     {
-        health -= damage;
+        health -= _damage;
 
         if (health <= 0)
         {

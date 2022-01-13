@@ -25,7 +25,6 @@ public class DungeonGenerator : MonoBehaviour
     public int height = 100;
     public int minRoomSize = 3;
     public int maxRoomSize = 7;
-    public int seed;
 
     public Room startRoom;
     private Room furthestRoom;

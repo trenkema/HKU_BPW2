@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour, IDamageable
 {
     public int health = 100;
     public int maxHealth = 100;
@@ -57,9 +57,9 @@ public class PlayerManager : MonoBehaviour
         inUse = false;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int _damage)
     {
-        health -= damage;
+        health -= _damage;
         healthText.text = "+ " + health;
 
         if (health <= 0)

@@ -43,14 +43,25 @@ public class FSM : MonoBehaviour
     public Animator gameOverAnimator;
     public Animator winAnimator;
 
+    public bool spawnPlayer = false;
+    public bool isMainMenu = false;
+
     private void Awake()
     {
-        GameManager.Instance.onPlayerSpawned += assignPlayer;
+        if (spawnPlayer)
+            GameManager.Instance.onPlayerSpawned += assignPlayer;
     }
 
     private void Start()
     {
-        state = (StateEnum)System.Enum.Parse(typeof(StateEnum), PlayerPrefs.GetString("GameFlow", "MainMenu"));
+        if (isMainMenu)
+        {
+            state = StateEnum.MainMenu;
+        }
+        else
+        {
+            state = (StateEnum)System.Enum.Parse(typeof(StateEnum), PlayerPrefs.GetString("GameFlow", "MainMenu"));
+        }
     }
 
     private void assignPlayer()
@@ -80,6 +91,8 @@ public class FSM : MonoBehaviour
 
     private void MainMenuState()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void GameState()
@@ -90,9 +103,13 @@ public class FSM : MonoBehaviour
         // Open PauseMenu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            playerMovement.enabled = false;
-            playerLook.enabled = false;
-            playerManager.enabled = false;
+            if (player != null)
+            {
+                playerMovement.enabled = false;
+                playerLook.enabled = false;
+                playerManager.enabled = false;
+            }
+
             state = StateEnum.PauseMenu;
             PlayerPrefs.SetString("GameFlow", state.ToString());
             pauseMenu.SetActive(true);
@@ -127,10 +144,15 @@ public class FSM : MonoBehaviour
     public void EnterGameOver()
     {
         GameManager.Instance.inventory.DeleteInventory();
-        player.GetComponent<Collider>().enabled = false;
-        playerMovement.enabled = false;
-        playerLook.enabled = false;
-        playerManager.enabled = false;
+
+        if (player != null)
+        {
+            player.GetComponent<Collider>().enabled = false;
+            playerMovement.enabled = false;
+            playerLook.enabled = false;
+            playerManager.enabled = false;
+        }
+
         state = StateEnum.GameOver;
         pauseMenu.SetActive(false);
         InGameHUD.SetActive(false);
@@ -146,9 +168,14 @@ public class FSM : MonoBehaviour
     {
         state = StateEnum.Game;
         PlayerPrefs.SetString("GameFlow", state.ToString());
-        playerMovement.enabled = true;
-        playerLook.enabled = true;
-        playerManager.enabled = true;
+
+        if (player != null)
+        {
+            playerMovement.enabled = true;
+            playerLook.enabled = true;
+            playerManager.enabled = true;
+        }
+
         pauseMenu.SetActive(false);
         gameOverScreen.SetActive(false);
     }
@@ -159,9 +186,14 @@ public class FSM : MonoBehaviour
         Cursor.visible = true;
         state = StateEnum.GameWin;
         PlayerPrefs.SetString("GameFlow", state.ToString());
-        playerMovement.enabled = false;
-        playerLook.enabled = false;
-        playerManager.enabled = false;
+
+        if (player != null)
+        {
+            playerMovement.enabled = false;
+            playerLook.enabled = false;
+            playerManager.enabled = false;
+        }
+
         gameWinPanel.SetActive(true);
         winAnimator.SetBool("GameWin", true);
     }

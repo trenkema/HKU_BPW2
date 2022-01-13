@@ -36,21 +36,7 @@ public class Grenade : MonoBehaviour
 
         foreach (Collider nearbyObject in colliders)
         {
-            Destructible destructible = nearbyObject.GetComponent<Destructible>();
-            EnemyAI enemy = nearbyObject.GetComponent<EnemyAI>();
-            PlayerManager player = nearbyObject.GetComponent<PlayerManager>();
-            if (destructible != null)
-            {
-                destructible.TakeDamage(damage);
-            }
-            else if (enemy != null)
-            {
-                enemy.TakeDamage(damage);
-            }
-            else if (player != null)
-            {
-                player.TakeDamage(damage);
-            }
+            nearbyObject.GetComponent<IDamageable>()?.TakeDamage(damage);
         }
 
         Collider[] collidersToMove = Physics.OverlapSphere(transform.position, radius);

@@ -14,7 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   container:
     Items:
-    - item: {fileID: 0}
+    - item: {fileID: 11400000, guid: 2011aae8deea5d848aa310a1757accaa, type: 2}
+      itemID: 0
+      amount: 0
+      useKey: 0
+      hasItem: 0
+      type: 0
+      removeOnUse: 0
+      isActive: 0
+    - item: {fileID: 11400000, guid: fadb2165d75e7c247923cc747a09f5e5, type: 2}
       itemID: 0
       amount: 0
       useKey: 0
@@ -38,12 +46,3 @@ MonoBehaviour:
       type: 0
       removeOnUse: 0
       isActive: 0
-    - item: {fileID: 0}
-      itemID: 0
-      amount: 0
-      useKey: 0
-      hasItem: 0
-      type: 0
-      removeOnUse: 0
-      isActive: 0
-  itemDatabase: {fileID: 0}
